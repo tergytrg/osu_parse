@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" styleClass="Background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane id="rootPane" fx:id="rootPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" styleClass="Background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osu_parse.MainController">
   <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -39,7 +39,7 @@
                   <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextArea>
-            <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" prefWidth="1000.0" text="Select output location:  No location chosen">
+            <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#selectPath" prefWidth="1000.0" text="Select output location:  No location chosen">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                </VBox.margin>
