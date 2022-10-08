@@ -1,0 +1,40 @@
+GridPane {
+    -fx-background-color: #221f2e;
+}
+
+Text {
+    -fx-fill: #FFFFFF;
+}
+
+TextArea {
+    -fx-control-inner-background:#2e293d;
+    -fx-prompt-text-fill: #66666F;
+}
+
+Button {
+    -fx-background-color: #9470ff;
+    -fx-text-fill: #FFFFFF;
+}
+
+Button:hover {
+    -fx-background-color: #5a32d1;
+    -fx-text-fill: #EEEEEE;
+}
+
+CheckBox {
+    -fx-text-fill: #DDDDDD;
+}
+
+
+#Logo {
+    -fx-fill: #FF66AA;
+    -fx-font-size: 56;
+}
+
+#Parse-button {
+    -fx-background-color: #FF66AA;
+}
+
+#Parse-button:hover {
+    -fx-background-color: #df2c7c;
+}
