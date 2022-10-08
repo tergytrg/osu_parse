@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 public class MainController {
 
@@ -58,14 +59,13 @@ public class MainController {
             path = getPath();
         }
         try {
-            alertParseInfo(matchParser.parseMatch(matchLinks, userList, mapPool, path, settings));
+            alertSucces(matchParser.parseMatch(matchLinks, userList, mapPool, path, settings));
         } catch (Exception e) {
-            e.printStackTrace();
-            error(e.getMessage());
+            error(e);
         }
     }
 
-    private void alertParseInfo(String info) {
+    private void alertSucces(String info) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Yay!");
         alert.setHeaderText("Parse successful!");
@@ -73,11 +73,16 @@ public class MainController {
         alert.show();
     }
 
-    private void error(String info) {
+    private void error(Exception e) {
+        String error = e.toString();
+        System.out.println(e.getClass().toString());
+        switch (e.getClass().toString()) {
+            case "class java.net.MalformedURLException" -> error += "\nPlease check the match links.";
+        }
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Oh no!");
-        alert.setHeaderText("I'm sorry, I could not parse that");
-        alert.setContentText(info);
+        alert.setHeaderText("Sorry! I could not parse that...");
+        alert.setContentText(error);
         alert.show();
     }
 
