@@ -12,10 +12,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="rootPane" fx:id="rootPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" styleClass="Background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osu_parse.MainController">
+<GridPane fx:id="rootPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" styleClass="Background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.osu_parse.MainController">
   <columnConstraints>
-    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="20.0" vgrow="SOMETIMES" />
@@ -23,7 +23,7 @@
     <RowConstraints maxHeight="1.7976931348623157E308" percentHeight="20.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Text id="Logo" strokeType="OUTSIDE" strokeWidth="0.0" text="Osu!Parse" GridPane.columnSpan="2">
+      <Text id="Logo" strokeType="OUTSIDE" strokeWidth="0.0" text="osu!Parse" GridPane.columnSpan="2">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
@@ -35,12 +35,12 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextArea prefHeight="1000.0" prefWidth="1000.0" promptText="https://osu.ppy.sh/community/matches/match_id">
+            <TextArea fx:id="matchLinksArea" prefHeight="1000.0" prefWidth="1000.0" promptText="https://osu.ppy.sh/community/matches/match_id">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                </VBox.margin>
             </TextArea>
-            <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#selectPath" prefWidth="1000.0" text="Select output location:  No location chosen">
+            <Button fx:id="pathButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#selectPath" prefWidth="1000.0" text="Select output directory">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -57,7 +57,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextArea prefHeight="1000.0" prefWidth="1000.0" promptText="username">
+            <TextArea fx:id="userListArea" prefHeight="1000.0" prefWidth="1000.0" promptText="userId:username">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                </VBox.margin>
@@ -67,7 +67,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <TextArea prefHeight="1000.0" prefWidth="1000.0" promptText="mapId">
+            <TextArea fx:id="mapPoolArea" prefHeight="1000.0" prefWidth="1000.0" promptText="NM1:mapId">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
                </VBox.margin>
@@ -85,20 +85,20 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <CheckBox mnemonicParsing="false" selected="true" text="Show Score" />
-            <CheckBox mnemonicParsing="false" selected="true" text="Show Normalised Score" GridPane.columnIndex="1" />
-            <CheckBox mnemonicParsing="false" selected="true" text="Show Accuracy" GridPane.rowIndex="1" />
-            <CheckBox mnemonicParsing="false" selected="true" text="Show Scoring-type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <CheckBox mnemonicParsing="false" selected="true" text="Show Mods" GridPane.rowIndex="2" />
-            <CheckBox mnemonicParsing="false" selected="true" text="Show Total" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <CheckBox fx:id="scoreCheck" mnemonicParsing="false" selected="true" text="Show Score" />
+            <CheckBox fx:id="norScoreCheck" mnemonicParsing="false" selected="true" text="Show Normalised Score" GridPane.columnIndex="1" />
+            <CheckBox fx:id="accCheck" mnemonicParsing="false" selected="true" text="Show Accuracy" GridPane.rowIndex="1" />
+            <CheckBox fx:id="scoreTypeCheck" mnemonicParsing="false" selected="true" text="Show Scoring-type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckBox fx:id="modsCheck" mnemonicParsing="false" selected="true" text="Show Mods" GridPane.rowIndex="2" />
+            <CheckBox fx:id="totalCheck" mnemonicParsing="false" selected="true" text="Show maps outside of mappool" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <GridPane.margin>
             <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </GridPane>
-      <Button id="Parse-button" mnemonicParsing="false" prefHeight="1000.0" prefWidth="1000.0" text="Parse!" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Button id="Parse-button" mnemonicParsing="false" onAction="#onParse" prefHeight="1000.0" prefWidth="1000.0" text="Parse!" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="32.0" />
          </font>
          <GridPane.margin>
             <Insets bottom="20.0" left="10.0" right="20.0" top="10.0" />
@@ -106,7 +106,7 @@
       </Button>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" text="Help" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#help" text="Help" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
          </children>
       </AnchorPane>
    </children>
