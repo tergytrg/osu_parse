@@ -24,7 +24,7 @@ public class MainController {
     @FXML
     private CheckBox modsCheck;
     @FXML
-    private CheckBox norScoreCheck;
+    private CheckBox emptyColumnCheck;
     @FXML
     private CheckBox scoreTypeCheck;
     @FXML
@@ -49,10 +49,10 @@ public class MainController {
         String matchLinks = matchLinksArea.getText();
         String userList = userListArea.getText();
         String mapPool = mapPoolArea.getText();
-        Boolean[] settings = {scoreCheck.isSelected(),
+        boolean[] settings = {scoreCheck.isSelected(),
                             accCheck.isSelected(),
                             modsCheck.isSelected(),
-                            norScoreCheck.isSelected(),
+                            emptyColumnCheck.isSelected(),
                             scoreTypeCheck.isSelected()};
         String path = pathButton.getText();
         if (path.equals("Select output directory")) {

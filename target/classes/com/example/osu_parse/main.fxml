@@ -86,11 +86,11 @@
         </rowConstraints>
          <children>
             <CheckBox fx:id="scoreCheck" mnemonicParsing="false" selected="true" text="Show Score" />
-            <CheckBox fx:id="norScoreCheck" mnemonicParsing="false" selected="true" text="Show Normalised Score" GridPane.columnIndex="1" />
-            <CheckBox fx:id="accCheck" mnemonicParsing="false" selected="true" text="Show Accuracy" GridPane.rowIndex="1" />
-            <CheckBox fx:id="scoreTypeCheck" mnemonicParsing="false" selected="true" text="Show Scoring-type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <CheckBox fx:id="modsCheck" mnemonicParsing="false" selected="true" text="Show Mods" GridPane.rowIndex="2" />
-            <CheckBox fx:id="totalCheck" mnemonicParsing="false" selected="true" text="Show maps outside of mappool" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <CheckBox fx:id="emptyColumnCheck" mnemonicParsing="false" text="Empty columns between maps" GridPane.columnIndex="1" />
+            <CheckBox fx:id="accCheck" mnemonicParsing="false" text="Show Accuracy" GridPane.rowIndex="1" />
+            <CheckBox fx:id="scoreTypeCheck" mnemonicParsing="false" text="Show Scoring-type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <CheckBox fx:id="modsCheck" mnemonicParsing="false" text="Show Mods" GridPane.rowIndex="2" />
+            <CheckBox fx:id="totalCheck" mnemonicParsing="false" text="Show maps outside of mappool" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
          <GridPane.margin>
             <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />

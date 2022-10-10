@@ -23,14 +23,14 @@ public class MatchParser {
      * @param users A string containing usernames and userIds on each line
      * @param mapPool A string containing identifiers and mapIds on each line
      * @param outputPath The directory where the output sheet should go
-     * @param settings Boolean array of the following settings in this order: [showScore, showAcc, showMods, showNormalisedScore, showScoringType]
+     * @param settings Boolean array of the following settings in this order: [showScore, showAcc, showMods, emptyColumnBetweenMaps, showScoringType]
      * @throws Exception There's a lot that can go wrong
      */
     public static String parseMatch(String matchLinks,
                                   String users,
                                   String mapPool,
                                   String outputPath,
-                                  Boolean[] settings) throws Exception {
+                                  boolean[] settings) throws Exception {
         String[] matchLinkList = matchLinks.split("\\r?\\n");
         userMap = stringToMap(users);
         beatmapMap = stringBeatmapToMap(mapPool);
@@ -41,7 +41,7 @@ public class MatchParser {
                 parseGame(game);
             }
         }
-        writeToFile(outputPath);
+        writeToFile(outputPath, settings);
         return "You can find the sheet at: " + outputPath + "/output.xlsx";
     }
 
@@ -173,7 +173,13 @@ public class MatchParser {
         }
     }
 
-    public static void writeToFile(String path) throws IOException {
+    /**
+     *
+     * @param path The directory where the output sheet should go
+     * @param settings boolean array of the following settings in this order: [showScore, showAcc, showMods, emptyColumnBetweenMaps, showScoringType]
+     * @throws IOException
+     */
+    public static void writeToFile(String path, boolean[] settings) throws IOException {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet spreadsheet = workbook.createSheet("Users");
         XSSFRow row;
@@ -186,7 +192,7 @@ public class MatchParser {
         int cellid = 1;
         for (String beatmapKey : mapIds) { // For every beatmap
             row.createCell(cellid).setCellValue(beatmapMap.get(beatmapKey).getName());
-            cellid += 5;
+            cellid += booleanSum(settings);
         }
         for (String key : userNames) { // For every user
             row = spreadsheet.createRow(rowid++);
@@ -194,17 +200,37 @@ public class MatchParser {
             row.createCell(cellid++).setCellValue(userMap.get(key));
             for (String beatmapKey : mapIds) { // For every beatmap
                 Score score = beatmapMap.get(beatmapKey).get(userMap.get(key));
-                row.createCell(cellid++).setCellValue(score.getScorePoints());
-                row.createCell(cellid++).setCellValue(score.getAccuracy());
-                row.createCell(cellid++).setCellValue(score.getMods());
-                row.createCell(cellid++).setCellValue(score.getScoring_type());
-                row.createCell(cellid++);
+                if (settings[0]) {
+                    row.createCell(cellid++).setCellValue(score.getScorePoints());
+                }
+                if (settings[1]) {
+                    row.createCell(cellid++).setCellValue(score.getAccuracy());
+                }
+                if (settings[2]) {
+                    row.createCell(cellid++).setCellValue(score.getMods());
+                }
+                if (settings[4]) {
+                    row.createCell(cellid++).setCellValue(score.getScoring_type());
+                }
+                if (settings[3]) { // Careful! 3 goes after 4...
+                    row.createCell(cellid++);
+                }
             }
         }
 
         FileOutputStream out = new FileOutputStream(new File(path + "/output.xlsx"));
         workbook.write(out);
         out.close();
+    }
+
+    public static int booleanSum(boolean[] booleans) {
+        int sum = 0;
+        for (boolean b : booleans) {
+            if (b) {
+                sum++;
+            }
+        }
+        return sum;
     }
 
 }
