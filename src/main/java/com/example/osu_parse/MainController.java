@@ -28,7 +28,7 @@ public class MainController {
     @FXML
     private CheckBox scoreTypeCheck;
     @FXML
-    private CheckBox totalCheck;
+    private CheckBox mapsOutsideOfPoolCheck;
 
     @FXML
     private TextArea matchLinksArea;
@@ -39,6 +39,8 @@ public class MainController {
 
     @FXML
     private Button pathButton;
+    @FXML
+    private Button helpButton;
 
     public void initialize() {
         this.matchParser = new MatchParser();
@@ -53,7 +55,8 @@ public class MainController {
                             accCheck.isSelected(),
                             modsCheck.isSelected(),
                             emptyColumnCheck.isSelected(),
-                            scoreTypeCheck.isSelected()};
+                            scoreTypeCheck.isSelected(),
+                            mapsOutsideOfPoolCheck.isSelected()};
         String path = pathButton.getText();
         if (path.equals("Select output directory")) {
             path = getPath();
@@ -88,6 +91,11 @@ public class MainController {
 
     @FXML
     protected void help() {
+        if (helpButton.getText().equals("Sorry")) {
+            helpButton.setText("Forgive me");
+        } else {
+            helpButton.setText("Sorry");
+        }
     }
 
     @FXML

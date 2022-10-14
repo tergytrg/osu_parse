@@ -38,7 +38,7 @@ public class MatchParser {
         for (String matchLink : matchLinkList) {
             List<JSONObject> games = getGamesFromMatch(getMatchFromOsu(matchLink), isWhiteList);
             for (JSONObject game : games) {
-                parseGame(game);
+                parseGame(game, settings[5]);
             }
         }
         writeToFile(outputPath, settings);
@@ -148,12 +148,15 @@ public class MatchParser {
      * Takes a 'game' and parses its JSON, it then puts the info into the Maps.
      * @param game The JSONObject of the game
      */
-    public static void parseGame(JSONObject game) {
+    public static void parseGame(JSONObject game, boolean mapsOutsideOfPool) {
         String beatMapId = ((JSONObject) game.get("beatmap")).get("id").toString();
         Beatmap beatmap = null;
         if (beatmapMap.containsKey(beatMapId)) {
             beatmap = beatmapMap.get(beatMapId);
         } else {
+            if (!mapsOutsideOfPool) {
+                return;
+            }
             beatmap = new Beatmap(beatMapId.toString());
             beatmapMap.put(beatMapId, beatmap);
         }
